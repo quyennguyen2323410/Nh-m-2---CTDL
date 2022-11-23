@@ -1,9 +1,12 @@
 #include<bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 struct Student{
-    string name, id, gioitinh;
-    double gpa;
+    string name, mssv, gioitinh;
+    double dtb; 
+    float toan, ly, hoa;
+    char hocluc [10] ; 
 };
 
 struct SV{
@@ -17,11 +20,14 @@ typedef struct SV* sv;
 sv makeNode(){
     Student s;
     cout << "Nhap thong tin sinh vien : \n";
-    cout << "Nhap ID: "; cin >> s.id; 
+    cout << "Nhap MSSV: "; cin >> s.mssv; 
     cout << "Nhap ten: "; cin.ignore();
     getline(cin, s.name);
-    cout << "Nhap gpa: "; cin >> s.gpa; 
     cout << "Nhap gioi tinh: "; cin >> s.gioitinh;
+    cout << "Nhap diem toan: "; cin >> s.toan;
+    cout << "Nhap dien ly: "; cin >> s.ly;
+    cout << "Nhap diem hoa: "; cin >> s.hoa;
+   // cout << "Nhap DTB: "; cin >> s.dtb; 
     sv tmp = new SV();
     tmp->s=s; 
     tmp->next = NULL;
@@ -124,12 +130,24 @@ void deleteMiddle(sv &a, int pos){
     }
 }
 
+//s.gpa = (s.toan+s.ly+s.hoa)/3
+
 void in(Student s){
     cout << "------------------\n";
-    cout << "ID: "<<s.id <<endl;
+    cout << "MSSV: "<<s.mssv <<endl;
     cout << "Ho ten: "<< s.name<<endl;
-    cout << "GPA: "<<fixed<<setprecision(2) << s.gpa << endl;
     cout << "Gioi Tinh: "<< s.gioitinh<<endl;
+    cout << "Toan: "<< s.toan<<endl;
+    cout << "Ly: "<< s.ly<<endl;
+    cout << "Hoa: "<< s.hoa<<endl;
+    s.dtb=(s.toan+s.ly+s.hoa)/3;
+    cout << "DTB: "<<fixed<<setprecision(2) <<s.dtb << endl;
+    if(s.dtb >= 8) strcpy(s.hocluc, "Gioi");
+    else if((s.toan+s.ly+s.hoa)/3 >= 6.5) strcpy(s.hocluc, "Kha");
+    else if((s.toan+s.ly+s.hoa)/3 >= 5) strcpy(s.hocluc, "Trung binh");
+    else strcpy(s.hocluc, "Yeu");
+
+    cout << "Xep loai hoc luc: "<< s.hocluc<<endl;
     cout << "------------------\n";
 }
 void inds(sv a){
@@ -145,7 +163,7 @@ void sapxep(sv &a){
     for(sv p=a; p->next != NULL; p=p->next){
         sv min = p;
         for(sv q=p->next; q != NULL; q=q->next){
-            if(q->s.gpa < min->s.gpa){
+            if(q-> s.dtb < min-> s.dtb){
                 min = q;
             }
         }
@@ -154,21 +172,35 @@ void sapxep(sv &a){
         p->s=tmp;
     }
 }
+    
+
+
 
 int main(){
     sv head = NULL;
     while(1){
-        cout << "-----------------MENU---------------\n";
-        cout << "1. Chen sinh vien vao dau danh sach \n";
-        cout << "2. chen sinh vien vao cuoi danh sach\n";
-        cout << "3. chen sinh vien vao giua danh sach\n";
-        cout << "4. Xoa sinh vien o dau danh sach\n";
-        cout << "5. Xoa sinh vien o cuoi danh sach\n";
-        cout << "6. Xoa sinh vien o giua danh sach\n";
-        cout << "7. Duyet danh sach lien ket\n";
-        cout << "8. Sap xep danh sach sinh vien\n";
-        cout << "0. Thoat!\n";
-        cout << "---------------------------------------\n";
+        cout << "***********************************************************\n";
+        cout << "********                ***********                 *******\n";
+        cout << "*****                      *****                      *****\n";
+        cout << "***                        MENU                         ***\n";     
+        cout << "**         1. Chen sinh vien vao dau danh sach           **\n";
+        cout << "*          2. Chen sinh vien vao cuoi danh sach           *\n";
+        cout << "*          3. Chen sinh vien vao giua danh sach           *\n";
+        cout << "*          4. Xoa sinh vien o dau danh sach               *\n";
+        cout << "*          5. Xoa sinh vien o cuoi danh sach              *\n";
+        cout << "**         6. Xoa sinh vien o giua danh sach             **\n";
+        cout << "***        7. Luu va hien thi danh sach lien ket        ***\n";
+        cout << "****       8. Sap xep danh sach sinh vien              ****\n";
+        cout << "******     0. Thoat!                                 ******\n";
+        cout << "*******                                             *******\n";
+        cout << "*********                                         *********\n";
+        cout << "************                                   ************\n";
+        cout << "**************                               **************\n";
+        cout << "*****************                         *****************\n";
+        cout << "*********************                 *********************\n";
+        cout << "************************           ************************\n";
+        cout << "***************************** *****************************\n";
+        cout << "-----------------------------------------------------------\n";
         cout << "Nhap lua chon: ";
         int lc; cin >> lc;
         if(lc == 1){
