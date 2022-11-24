@@ -2,7 +2,7 @@
 using namespace std;
 
 struct Student{
-    string name, mssv, gioitinh;
+    string name, mssv, gioitinh, lop, namsinh;
     double dtb; 
     float toan, ly, hoa;
     char hocluc [10] ; 
@@ -19,11 +19,13 @@ void sapxep(SV a[], int n);
 // cap nhat dong mot node moi du lieu
 sv makeNode(){
     Student s;
-    cout << "Nhap thong tin sinh vien : \n";
+    cout << "NHAP THONG TIN SINH VIEN\n";
     cout << "Nhap MSSV: "; cin >> s.mssv; 
-    cout << "Nhap ten: "; cin.ignore();
+    cout << "Nhap ho & ten: "; cin.ignore();
     getline(cin, s.name);
+    cout << "Nhap lop: "; cin >> s.lop;
     cout << "Nhap gioi tinh: "; cin >> s.gioitinh;
+    cout << "Nhap nam sinh: "; cin >> s.namsinh;
     cout << "Nhap diem toan: "; cin >> s.toan;
     cout << "Nhap dien ly: "; cin >> s.ly;
     cout << "Nhap diem hoa: "; cin >> s.hoa;
@@ -46,7 +48,7 @@ int Size(sv a){
     }
     return cnt;
 }
-//them phan tu vao dau danh sach
+//them sinh viên vao dau danh sach
 void insertFirst(sv &a){
     sv tmp = makeNode();
     if(a == NULL){
@@ -57,7 +59,7 @@ void insertFirst(sv &a){
         a=tmp;
     }
 }
-//them phan tu vao cuoi danh sach
+//them sinh viên vao cuoi danh sach
 void insertLast(sv &a){
     sv tmp = makeNode();
     if(a == NULL){
@@ -71,7 +73,7 @@ void insertLast(sv &a){
         p->next = tmp;
     }
 }
-//them phan tu vao giua
+//them sinh viên tùy ý
 void insertMiddle(sv &a, int pos){
     int n=Size(a);
     if(pos <= 0 || pos > n+1){
@@ -92,7 +94,7 @@ void insertMiddle(sv &a, int pos){
     tmp->next=p->next;
     p->next=tmp;
 }
-//xoa phan tu o dau
+//xoa phan tu o đầu
 void deleteFirst(sv &a){
     if(a==NULL)
     return;
@@ -114,7 +116,7 @@ void deleteLast(sv &a){
         truoc -> next = NULL;
     }
 }
-//xoa o giua
+//xóa tùy ý
 void deleteMiddle(sv &a, int pos){
     if(pos <= 0||pos>Size(a)) return;
     sv truoc = NULL, sau = a;
@@ -136,7 +138,9 @@ void in(Student s){
     cout << "------------------\n";
     cout << "MSSV: "<<s.mssv <<endl;
     cout << "Ho ten: "<< s.name<<endl;
+    cout << "Lop: "<< s.lop <<endl;
     cout << "Gioi Tinh: "<< s.gioitinh<<endl;
+    cout << "Nam sinh: "<< s.namsinh<<endl;
     cout << "Toan: "<< s.toan<<endl;
     cout << "Ly: "<< s.ly<<endl;
     cout << "Hoa: "<< s.hoa<<endl;
@@ -149,6 +153,7 @@ void in(Student s){
     cout << "Xep loai hoc luc: "<< s.hocluc<<endl;
     cout << "----------------------------------------\n";
 }
+// chức năng lưu và tin ra danh sách sinh viên
 void inds(sv a){
     cout << "Danh sach sinh vien\n";
     while(a != NULL){
@@ -157,12 +162,12 @@ void inds(sv a){
     }
     cout << endl;
 }
-
+// chức năng sắp xếp sinh viên theo điểm trung bình
 void sapxep(sv &a){
     for(sv p=a; p->next != NULL; p=p->next){
         sv min = p;
         for(sv q=p->next; q != NULL; q=q->next){
-            if(q-> s.dtb < min-> s.dtb){
+            if(q-> s.hocluc < min-> s.hocluc){
                 min = q;
             }
         }
@@ -186,7 +191,7 @@ int main(){
         cout << "*          5. Xoa sinh vien o cuoi danh sach              *\n";
         cout << "**         6. Xoa sinh vien bat ky trong danh sach       **\n";
         cout << "***        7. Luu va hien thi danh sach lien ket        ***\n";
-        cout << "****       8. Sap xep danh sach sinh vien              ****\n";
+        cout << "****       8. Sap xep sinh vien theo DTB               ****\n";
         cout << "******     0. Thoat!                                 ******\n";
         cout << "*******                                             *******\n";
         cout << "*********                                         *********\n";
@@ -208,7 +213,7 @@ int main(){
             cout << "Them thong tin thanh cong\n";
         }
         else if(lc==3){
-            int pos; cout << "Nhap vao vi tri can chen : "; cin >> pos;
+            int pos; cout << "Nhap vao vi tri can chen: "; cin >> pos;
             insertMiddle(head, pos);
             cout << "Them thong tin thanh cong\n";
         }
@@ -221,7 +226,7 @@ int main(){
             cout << "Xoa sinh vien thanh cong\n";
         }
         else if(lc==6){
-            int pos; cout <<"Nhap vi tri can chen; "; cin >> pos;
+            int pos; cout <<"Nhap vi tri can chen: "; cin >> pos;
             deleteMiddle(head, pos);
             cout << "Xoa sinh vien thanh cong\n";
         }
