@@ -1,5 +1,4 @@
 #include<bits/stdc++.h>
-#include <iostream>
 using namespace std;
 
 struct Student{
@@ -15,6 +14,7 @@ struct SV{
 };
 
 typedef struct SV* sv;
+void sapxep(SV a[], int n);
 
 // cap nhat dong mot node moi du lieu
 sv makeNode(){
@@ -143,12 +143,11 @@ void in(Student s){
     s.dtb=(s.toan+s.ly+s.hoa)/3;
     cout << "DTB: "<<fixed<<setprecision(2) <<s.dtb << endl;
     if(s.dtb >= 8) strcpy(s.hocluc, "Gioi");
-    else if((s.toan+s.ly+s.hoa)/3 >= 6.5) strcpy(s.hocluc, "Kha");
-    else if((s.toan+s.ly+s.hoa)/3 >= 5) strcpy(s.hocluc, "Trung binh");
+    else if(s.dtb >= 6.5) strcpy(s.hocluc, "Kha");
+    else if(s.dtb >= 5) strcpy(s.hocluc, "Trung binh");
     else strcpy(s.hocluc, "Yeu");
-
     cout << "Xep loai hoc luc: "<< s.hocluc<<endl;
-    cout << "------------------\n";
+    cout << "----------------------------------------\n";
 }
 void inds(sv a){
     cout << "Danh sach sinh vien\n";
@@ -172,9 +171,6 @@ void sapxep(sv &a){
         p->s=tmp;
     }
 }
-    
-
-
 
 int main(){
     sv head = NULL;
@@ -185,10 +181,10 @@ int main(){
         cout << "***                        MENU                         ***\n";     
         cout << "**         1. Chen sinh vien vao dau danh sach           **\n";
         cout << "*          2. Chen sinh vien vao cuoi danh sach           *\n";
-        cout << "*          3. Chen sinh vien vao giua danh sach           *\n";
+        cout << "*          3. Chen sinh vien bat ky vao danh sach         *\n";
         cout << "*          4. Xoa sinh vien o dau danh sach               *\n";
         cout << "*          5. Xoa sinh vien o cuoi danh sach              *\n";
-        cout << "**         6. Xoa sinh vien o giua danh sach             **\n";
+        cout << "**         6. Xoa sinh vien bat ky trong danh sach       **\n";
         cout << "***        7. Luu va hien thi danh sach lien ket        ***\n";
         cout << "****       8. Sap xep danh sach sinh vien              ****\n";
         cout << "******     0. Thoat!                                 ******\n";
@@ -209,20 +205,25 @@ int main(){
         }
         else if(lc == 2){
             insertLast(head);
+            cout << "Them thong tin thanh cong\n";
         }
         else if(lc==3){
             int pos; cout << "Nhap vao vi tri can chen : "; cin >> pos;
             insertMiddle(head, pos);
+            cout << "Them thong tin thanh cong\n";
         }
         else if(lc==4){
             deleteFirst(head);
+            cout << "Xoa sinh vien thanh cong\n";
         }
         else if(lc==5){
             deleteLast(head);
+            cout << "Xoa sinh vien thanh cong\n";
         }
         else if(lc==6){
             int pos; cout <<"Nhap vi tri can chen; "; cin >> pos;
             deleteMiddle(head, pos);
+            cout << "Xoa sinh vien thanh cong\n";
         }
         else if(lc==7){
             inds(head);
