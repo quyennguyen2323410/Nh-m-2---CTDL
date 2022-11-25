@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+int slsv;
 struct Student{
     string name, mssv, gioitinh, lop, namsinh;
     double dtb; 
@@ -15,22 +15,41 @@ struct SV{
 
 typedef struct SV* sv;
 void sapxep(SV a[], int n);
-
+// bool duyetMSNV(char x,Student *s){
+//     for(SV i=s.)
+// }
 // cap nhat dong mot node moi du lieu
 sv makeNode(){
     Student s;
     cout << "NHAP THONG TIN SINH VIEN\n";
+    // int duyet=0;
+    // while(duyet==0){
+    //  cout << "Nhap MSSV: "; cin >> s.mssv;
+
+    // }
     cout << "Nhap MSSV: "; cin >> s.mssv; 
     cout << "Nhap ho & ten: "; cin.ignore();
     getline(cin, s.name);
-    cout << "Nhap lop: "; cin >> s.lop;
+    //cout << "Nhap lop: "; cin >> s.lop;
     cout << "Nhap gioi tinh: "; cin >> s.gioitinh;
-    cout << "Nhap nam sinh: "; cin >> s.namsinh;
-    cout << "Nhap diem toan: "; cin >> s.toan;
+    //cout << "Nhap nam sinh: "; cin >> s.namsinh;
+    cout << "Nhap diem toan: "; cin >> s.toan ;
+    while (s.toan < 0 || s.toan >11) {
+        cout<<"Nhap lai diem toan thang diem 10: ";
+        cin>>s.toan;
+        }
     cout << "Nhap dien ly: "; cin >> s.ly;
+    while (s.ly < 0 || s.ly > 11){
+        cout <<"Nhap lai diem ly thang diem 10: "; 
+        cin>>s.ly;
+    }
     cout << "Nhap diem hoa: "; cin >> s.hoa;
+    while (s.hoa < 0 || s.hoa >11){
+        cout <<"Nhap lai diem ly thang diem 10: "; 
+        cin>>s.hoa;
+    }
    // cout << "Nhap DTB: "; cin >> s.dtb; 
-    sv tmp = new SV();
+     sv tmp = new SV();
     tmp->s=s; 
     tmp->next = NULL;
     return tmp;
@@ -58,6 +77,7 @@ void insertFirst(sv &a){
         tmp->next=a;
         a=tmp;
     }
+    slsv++;
 }
 //them sinh viên vao cuoi danh sach
 void insertLast(sv &a){
@@ -72,6 +92,7 @@ void insertLast(sv &a){
         }
         p->next = tmp;
     }
+    slsv++;
 }
 //them sinh viên tùy ý
 void insertMiddle(sv &a, int pos){
@@ -93,6 +114,7 @@ void insertMiddle(sv &a, int pos){
     sv tmp=makeNode();
     tmp->next=p->next;
     p->next=tmp;
+    slsv++; 
 }
 //xoa phan tu o đầu
 void deleteFirst(sv &a){
@@ -141,7 +163,7 @@ void in(Student s){
     cout << "Lop: "<< s.lop <<endl;
     cout << "Gioi Tinh: "<< s.gioitinh<<endl;
     cout << "Nam sinh: "<< s.namsinh<<endl;
-    cout << "Toan: "<< s.toan<<endl;
+    cout << "Toan: "<< s.toan <<endl;
     cout << "Ly: "<< s.ly<<endl;
     cout << "Hoa: "<< s.hoa<<endl;
     s.dtb=(s.toan+s.ly+s.hoa)/3;
@@ -176,6 +198,17 @@ void sapxep(sv &a){
         p->s=tmp;
     }
 }
+/*/
+    // for(int i = 0;i < n;i++) {
+    //     for(int j = i+1; j < n;j++) {
+    //         if(a[i].s.dtb > a[j].s.dtb) {
+    //             tmp = a[i];
+    //             a[i] = a[j];
+    //             a[j] = tmp;
+    //         }
+    //     }
+    // }
+}*/
 
 int main(){
     sv head = NULL;
@@ -235,6 +268,7 @@ int main(){
         }
         else if(lc==8){
             sapxep(head);
+           //sapxepTheoDTB(head,slsv);
         }
         else if(lc==0){
             break;
